@@ -1,0 +1,39 @@
+package ad_manage
+
+import (
+	"operate-backend/core/backend/ad_manage/ad"
+	"operate-backend/core/backend/ad_manage/client"
+	"operate-backend/core/backend/ad_manage/keyword"
+
+	"github.com/gin-gonic/gin"
+)
+
+const ComponentName = "ad_manage"
+
+// Init 初始化
+func Init(grouper *gin.RouterGroup) error {
+	handler := grouper.Group(ComponentName)
+
+	if err := keyword.Init(handler); err != nil {
+		return err
+	}
+
+	if err := ad.Init(handler); err != nil {
+		return err
+	}
+
+	if err := client.Init(handler); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Start 启动
+func Start() error { return nil }
+
+// Shutdown 关闭
+func Shutdown() error { return nil }
+
+// LoadCache 加载缓存
+func LoadCache() error { return nil }
